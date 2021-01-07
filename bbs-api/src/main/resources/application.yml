@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: vuebbs
+    password: vuebbs123!@#
+    url: jdbc:mysql://mariadb.cchnuymxmmul.ap-northeast-2.rds.amazonaws.com:3306/vuebbs
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show_sql: true
+      format_sql: true
