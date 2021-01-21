@@ -1,11 +1,11 @@
 <template>
-
+<router-view></router-view>
 </template>
 
 <script>
 export default {
-  name: "header"
-}
+  name: 'LocaleComponent',
+};
 </script>
 
 <style scoped>

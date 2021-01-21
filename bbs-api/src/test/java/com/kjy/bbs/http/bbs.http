@@ -1,0 +1,7 @@
+GET http://localhost:3000/bbs
+
+###
+POST http://localhost:3000/bbs
+Content-Type: application/json
+
+{"title": "입력 테스트", "content": "입력 테스트 내용"}

@@ -1,23 +1,23 @@
 package com.kjy.bbs.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bbs")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
+@Setter
 public class BbsVo {
 
     @Id
-    @Setter
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -33,6 +33,4 @@ public class BbsVo {
 
     @UpdateTimestamp
     private LocalDateTime updtDtm;
-
-
 }
