@@ -4,6 +4,7 @@ import lombok.*;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,6 +38,23 @@ public class BbsDto {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class search {
+        private Long id;
+
+        private String title;
+
+        private String content;
+
+        private String registId;
+
+        private LocalDateTime registDtm;
+    }
+
+    @Builder
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Get {
 
         private Long id;
@@ -60,8 +78,21 @@ public class BbsDto {
             return dto;
         }
 
-        public static List<Get> of(List<BbsVo> bbsList) {
-            return bbsList.stream().map(Get::of).collect(Collectors.toList());
+        // jpa 페이징 사용
+        public static Page<Get> of(Page<BbsVo> pageBbs) {
+            return pageBbs.map(bbsVo -> {
+               return Get.builder()
+                       .id(bbsVo.getId())
+                       .title(bbsVo.getTitle())
+                       .registId(bbsVo.getRegistId())
+                       .registDtm(bbsVo.getRegistDtm())
+                       .build();
+            });
         }
+
+        // jpa 페이징 사용하지 않을 때...
+//        public static List<Get> of(List<BbsVo> bbsList) {
+//            return bbsList.stream().map(Get::of).collect(Collectors.toList());
+//        }
     }
 }

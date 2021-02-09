@@ -3,6 +3,9 @@ package com.kjy.bbs.controller;
 import com.kjy.bbs.model.BbsDto;
 import com.kjy.bbs.service.BbsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +20,8 @@ public class BbsController {
     private BbsService bbsService;
 
     @GetMapping("")
-    public List<BbsDto.Get> get(){
-        return bbsService.getBbses();
+    public Page<BbsDto.Get> get(@PageableDefault(page = 0, size = 10, sort = "registDtm") Pageable pageable){
+        return bbsService.getBbses(pageable);
     }
 
     @GetMapping("{bbsId}")

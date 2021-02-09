@@ -7,10 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,16 +39,16 @@ class BbsControllerTests {
      */
     @Test
     public void list() throws Exception {
-        BbsVo bbsVo = BbsVo.builder()
-                .id(1L)
-                .title("제목1")
-                .content("내용1")
-                .registId("KJY")
+        Pageable pageable = PageRequest.of(1, 10);
+        BbsDto.Get mockGet = BbsDto.Get.builder()
+                .id(1004L)
+                .title("제목")
+                .registId("테스터1")
                 .build();
-        List<BbsDto.Get> response = new ArrayList<>();
-        response.add( BbsDto.Get.of(bbsVo) );
+        Page<BbsDto.Get> response = new PageImpl<>( Arrays.asList(mockGet ));
+//        response.add( BbsDto.Get.of(bbsVo) );
 
-        given(bbsService.getBbses()).willReturn(response);
+        given(bbsService.getBbses(pageable)).willReturn(response);
 
         mvc.perform(get("/bbs")
         )

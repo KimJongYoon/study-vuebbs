@@ -10,12 +10,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(bbs, id) in bbsList.datas" :key="id">
-        <td>{{ bbs.id }}</td>
-        <td @click="goDetail(bbs.id)">{{ bbs.title }}</td>
-        <td>{{ bbs.registId }}</td>
-        <td>{{ bbs.registDtm }}</td>
-      </tr>
+        <tr v-for="(bbs, id) in bbsList.datas" :key="id">
+          <td>{{ bbs.id }}</td>
+          <td @click="goDetail(bbs.id)">{{ bbs.title }}</td>
+          <td>{{ bbs.registId }}</td>
+          <td>{{ bbs.registDtm }}</td>
+        </tr>
       </tbody>
     </table>
     <div class="btn-panel">
@@ -54,6 +54,7 @@ function bbsEvent(routerParam) {
 function getBbsDatas() {
   const bbsList = reactive({
     datas: [],
+    // 페이징 관련 변수 추가(curruntPage, firstPage, lastPage,
   });
 
   bbsApi.getBbs().then((res) => {

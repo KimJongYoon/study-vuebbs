@@ -55,11 +55,6 @@ export default {
 
     const { goList, updateBbs } = btnEvent(btnParam);
 
-    bbsNewForm.title = '123';
-
-    console.log("함수 전 : ", bbsNewForm);
-    console.log("함수 전 title: ", bbsNewForm.title);
-
     bbsApi.getBbs(bbsId).then((res) => {
       const { title, content } = res.data;
       bbsNewForm.title = title;
